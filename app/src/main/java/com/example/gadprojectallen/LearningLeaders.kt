@@ -71,7 +71,7 @@ class LearningLeaders : Fragment() {
                     recycler.setLayoutManager(layoutManager);
                     var adapter = LeanersAdapter(getActivity(),topLearners)
                     recycler.setAdapter(adapter)
-                    Toast.makeText(getActivity(), topLearners?.get(1)?.toString(), Toast.LENGTH_SHORT).show();
+
                 }
             }
 

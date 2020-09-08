@@ -69,7 +69,7 @@ class SkillsIQLeaders : Fragment() {
                     recycler.setLayoutManager(layoutManager);
                     var adapter = SkillsAdapter(getActivity(),topSkilled)
                     recycler.setAdapter(adapter)
-                    Toast.makeText(getActivity(), topSkilled?.get(1)?.toString(),Toast.LENGTH_SHORT).show();
+
                 }
             }
 

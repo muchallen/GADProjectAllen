@@ -77,7 +77,7 @@ open class SubmissionFragment : Fragment() {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
         var submitInterface: GAD = retrofit.create(GAD::class.java);
-        var submitCall: Call<Submit> = submitInterface.submitData(data)
+        var submitCall: Call<Submit> = submitInterface.submitData(data.firstName,data.lastName,data.email,data.github)
 
         submitCall.enqueue(object : Callback<Submit>{
             override fun onFailure(call: Call<Submit>, t: Throwable) {
@@ -85,9 +85,11 @@ open class SubmissionFragment : Fragment() {
             }
             override fun onResponse(call: Call<Submit>, response: Response<Submit>) {
                 if(!response.isSuccessful){
-                    Toast.makeText(getActivity(), " failed "+response.message() ,Toast.LENGTH_LONG).show()
+                    Toast.makeText(getActivity(), " failed "+response.message()+" "+ response.code() ,Toast.LENGTH_LONG).show()
+                    return
                 }else
                 Toast.makeText(getActivity(), " Success " + response.code() ,Toast.LENGTH_LONG).show()
+                return
             }
 
         });

@@ -5,10 +5,7 @@ import com.example.gadprojectallen.models.Skill
 import com.example.gadprojectallen.models.Skills
 import com.example.gadprojectallen.models.Submit
 import retrofit2.Call
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.POST
-import retrofit2.http.Query
+import retrofit2.http.*
 
 
 interface GAD {
@@ -19,7 +16,14 @@ interface GAD {
     fun getLearners (): Call<Learners>
 
     @POST("formResponse")
-    fun submitData(@Body data:Submit):Call<Submit>
+    @FormUrlEncoded
+    fun submitData(
+        @Field("entry.1877115667")Name:String,
+        @Field("entry.2006916086")lastName:String,
+        @Field(" entry.1824927963")EmailAddress:String,
+        @Field("entry.284483984")linkToProject:String
+
+    ):Call<Submit>
 
 
 
