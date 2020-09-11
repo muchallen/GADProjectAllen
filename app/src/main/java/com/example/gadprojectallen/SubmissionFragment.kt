@@ -8,8 +8,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
+import androidx.fragment.app.FragmentTransaction
 import com.example.gadprojectallen.`interface`.GAD
 import com.example.gadprojectallen.models.Submit
+import com.example.gadprojectallen.ui.main.SectionsPagerAdapter
 import com.google.android.material.textfield.TextInputEditText
 import retrofit2.Call
 import retrofit2.Callback
@@ -46,6 +48,7 @@ open class SubmissionFragment : Fragment() {
         val email: TextInputEditText = view.findViewById(R.id.EmailAddress)
         val github: TextInputEditText = view.findViewById(R.id.github)
 
+
         back.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
                 getFragmentManager()?.popBackStack();
@@ -56,11 +59,18 @@ open class SubmissionFragment : Fragment() {
 
         submit.setOnClickListener(object : View.OnClickListener {
             override fun onClick(p0: View?) {
+
                 if(firstName.text.isNullOrEmpty()||lastName.text.isNullOrEmpty()||email.text.isNullOrEmpty()||github.text.isNullOrEmpty()){
                     Toast.makeText(getActivity(), "Complete All Fields",Toast.LENGTH_LONG).show()
                     return
                 }else{
-                    postData(Submit(firstName.text.toString(),lastName.text.toString(),email.text.toString(),github.text.toString()))
+                    val fm = fragmentManager;
+                    val fragment: Fragment = Confirmation(Submit(firstName.text.toString(),lastName.text.toString(),email.text.toString(),github.text.toString()));
+                    val ft: FragmentTransaction? = fm?.beginTransaction();
+                    ft?.replace(R.id.submitLayout,fragment);
+                    ft?.addToBackStack(null)
+                    ft?.commit();
+                  //  postData(Submit(firstName.text.toString(),lastName.text.toString(),email.text.toString(),github.text.toString()))
                 }
 
 
